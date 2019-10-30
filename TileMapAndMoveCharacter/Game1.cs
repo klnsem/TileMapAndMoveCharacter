@@ -13,6 +13,9 @@ namespace TileMapAndMoveCharacter
         SpriteBatch spriteBatch;
         private Texture2D mapTiles;
         private Tile[,] BackgroundToDraw;
+        private Character character;
+        const int framesPerSecond = 60;
+        private int frameCounter = 0;
         
         public Game1()
         {
@@ -50,9 +53,7 @@ namespace TileMapAndMoveCharacter
                     BackgroundToDraw[x, y] = Maps.GetTile(id, mapTiles, x, y);
                 }
             }
-
-            
-            // TODO: use this.Content to load your game content here
+            character = new Character(this.Content.Load<Texture2D>("character"));
         }
 
         /// <summary>
@@ -71,9 +72,15 @@ namespace TileMapAndMoveCharacter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            frameCounter++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            if (frameCounter < framesPerSecond && frameCounter % 3 == 0) {
+                character.Update();
+            }
+            if (frameCounter >= 60) {
+                frameCounter = 0;
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -93,6 +100,7 @@ namespace TileMapAndMoveCharacter
                 }
             }
             spriteBatch.End();
+            character.Draw(spriteBatch);
 
             base.Draw(gameTime);
         }

@@ -16,8 +16,8 @@ namespace TileMapAndMoveCharacter
     {
         public int tileId;
         public Texture2D texture;
-        public int x;
-        public int y;
+        public int sheetX;
+        public int sheetY;
         public int size;
         public Rectangle sheetRectangle;
         public Rectangle outputRectangle;
@@ -57,8 +57,8 @@ namespace TileMapAndMoveCharacter
             Tile newTile = new Tile();
             newTile.tileId = 1;
             newTile.size = 32;
-            newTile.x = 14 * 32;
-            newTile.y = 0;
+            newTile.sheetX = 14 * 32;
+            newTile.sheetY = 0;
             newTile.sheetRectangle = new Rectangle(id * 32, 0 * 32, 32, 32);
             newTile.texture = texture;
             newTile.outputRectangle = new Rectangle(outputY * 32, outputX * 32, 32, 32);
