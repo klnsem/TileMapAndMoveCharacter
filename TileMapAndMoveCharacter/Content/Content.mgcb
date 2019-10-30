@@ -25,6 +25,9 @@
 /processorParam:TextureFormat=Color
 /build:hyptosis_tile-art-batch-1.png;tiles.png
 
+#begin map1.mapr
+/copy:map1.mapr
+
 #begin ranger_f.png
 /importer:TextureImporter
 /processor:TextureProcessor

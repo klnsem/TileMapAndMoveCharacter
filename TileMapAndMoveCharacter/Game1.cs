@@ -43,10 +43,10 @@ namespace TileMapAndMoveCharacter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ScreenMap screenMap = Maps.CreateMap();
             LoadMapResources(screenMap);
-            BackgroundToDraw = new Tile[25, 15];
-            for (int x = 0; x < 25; x++) {
-                for (int y = 0; y < 15; y++) {
-                    int id = 13;
+            BackgroundToDraw = new Tile[15, 25];
+            for (int x = 0; x < 15; x++) {
+                for (int y = 0; y < 25; y++) {
+                    int id = screenMap.tiles[x, y];
                     BackgroundToDraw[x, y] = Maps.GetTile(id, mapTiles, x, y);
                 }
             }
@@ -86,11 +86,9 @@ namespace TileMapAndMoveCharacter
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
             spriteBatch.Begin();
-            for (int x = 0; x < 25; x++) {
-                for (int y = 0; y < 15; y++) {
+            for (int x = 0; x < 15; x++) {
+                for (int y = 0; y < 25; y++) {
                     spriteBatch.Draw(mapTiles, BackgroundToDraw[x, y].outputRectangle, BackgroundToDraw[x, y].sheetRectangle, Color.White);
                 }
             }
