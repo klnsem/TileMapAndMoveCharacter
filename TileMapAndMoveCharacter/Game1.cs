@@ -11,6 +11,8 @@ namespace TileMapAndMoveCharacter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Texture2D mapTiles;
+        private Tile[,] BackgroundToDraw;
         
         public Game1()
         {
@@ -39,7 +41,17 @@ namespace TileMapAndMoveCharacter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            ScreenMap screenMap = Maps.CreateMap();
+            LoadMapResources(screenMap);
+            BackgroundToDraw = new Tile[25, 15];
+            for (int x = 0; x < 25; x++) {
+                for (int y = 0; y < 15; y++) {
+                    int id = 13;
+                    BackgroundToDraw[x, y] = Maps.GetTile(id, mapTiles, x, y);
+                }
+            }
 
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,8 +88,19 @@ namespace TileMapAndMoveCharacter
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+            for (int x = 0; x < 25; x++) {
+                for (int y = 0; y < 15; y++) {
+                    spriteBatch.Draw(mapTiles, BackgroundToDraw[x, y].outputRectangle, BackgroundToDraw[x, y].sheetRectangle, Color.White);
+                }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        internal void LoadMapResources(ScreenMap screenMap)
+        {
+            mapTiles = this.Content.Load<Texture2D>(screenMap.tilesName);
         }
     }
 }
