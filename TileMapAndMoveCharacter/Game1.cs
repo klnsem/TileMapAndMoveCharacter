@@ -75,9 +75,10 @@ namespace TileMapAndMoveCharacter
             frameCounter++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if (frameCounter < framesPerSecond && frameCounter % 3 == 0) {
-                character.Update();
+            if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
+                character.MoveCharacter(Character.Directions.EAST);
             }
+            character.Update();
             if (frameCounter >= 60) {
                 frameCounter = 0;
             }
